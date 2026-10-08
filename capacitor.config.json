@@ -1,0 +1,9 @@
+{
+  "appId": "app.warkop48.kasir",
+  "appName": "Warkop48 Kasir",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "allowNavigation": ["warkop48.freedev.app"]
+  }
+}
