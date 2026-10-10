@@ -9,9 +9,9 @@ permissions:
   contents: write
 
 env:
-  APP_URL: https://warkop48.freedev.app
-  APP_ID: com.warkop48.app
-  APP_NAME: Warkop48
+  APP_URL: https://warkop48.freedev.app/#/admin
+  APP_ID: com.warkop48.admin
+  APP_NAME: Warkop48 Admin
 
 jobs:
   apk:
@@ -22,21 +22,25 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
 
-      - name: Tulis capacitor.config.json sesuai domain
+      - name: Tulis konfigurasi Capacitor dan halaman awal
         run: |
+          mkdir -p www
+          cat > www/index.html <<HTML
+          <!doctype html>
+          <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>$APP_NAME</title>
+          <style>body{background:#260212;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}</style>
+          </head><body>Memuat...<script>location.replace("$APP_URL");</script></body></html>
+          HTML
           cat > capacitor.config.json <<JSON
           {
             "appId": "$APP_ID",
             "appName": "$APP_NAME",
             "webDir": "www",
-            "server": {
-              "url": "$APP_URL",
-              "cleartext": false,
-              "allowNavigation": ["warkop48.freedev.app"]
-            }
+            "server": { "cleartext": false, "allowNavigation": ["warkop48.freedev.app"] }
           }
           JSON
           cat capacitor.config.json
+          cat www/index.html
 
       - name: Install dependency
         run: npm install
@@ -64,17 +68,17 @@ jobs:
           ./gradlew assembleDebug --no-daemon
 
       - name: Siapkan file APK
-        run: cp android/app/build/outputs/apk/debug/app-debug.apk Warkop48.apk
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk Warkop48-Admin.apk
 
       - uses: actions/upload-artifact@v4
         with:
-          name: Warkop48-apk
-          path: Warkop48.apk
+          name: Warkop48-Admin-apk
+          path: Warkop48-Admin.apk
 
       - name: Terbitkan ke Releases
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "apk-${{ github.run_number }}" Warkop48.apk \
-            --title "Warkop48 APK #${{ github.run_number }}" \
-            --notes "APK debug Warkop48 (${{ env.APP_URL }})"
+          gh release create "admin-${{ github.run_number }}" Warkop48-Admin.apk \
+            --title "Warkop48 Admin APK #${{ github.run_number }}" \
+            --notes "APK debug Warkop48 Admin (${{ env.APP_URL }})"
