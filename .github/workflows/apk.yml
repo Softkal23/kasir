@@ -8,20 +8,35 @@ on:
 permissions:
   contents: write
 
+env:
+  APP_URL: https://warkop48.freedev.app
+  APP_ID: com.warkop48.app
+  APP_NAME: Warkop48
+
 jobs:
   apk:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cek alamat situs di capacitor.config.json
-        run: |
-          if grep -q "GANTI-DOMAINMU" capacitor.config.json; then
-            echo "::error::Ganti alamat situs di capacitor.config.json"; exit 1
-          fi
-
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
+
+      - name: Tulis capacitor.config.json sesuai domain
+        run: |
+          cat > capacitor.config.json <<JSON
+          {
+            "appId": "$APP_ID",
+            "appName": "$APP_NAME",
+            "webDir": "www",
+            "server": {
+              "url": "$APP_URL",
+              "cleartext": false,
+              "allowNavigation": ["warkop48.freedev.app"]
+            }
+          }
+          JSON
+          cat capacitor.config.json
 
       - name: Install dependency
         run: npm install
@@ -53,7 +68,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: WarkopKu-apk
+          name: Warkop48-apk
           path: Warkop48.apk
 
       - name: Terbitkan ke Releases
@@ -62,4 +77,4 @@ jobs:
         run: |
           gh release create "apk-${{ github.run_number }}" Warkop48.apk \
             --title "Warkop48 APK #${{ github.run_number }}" \
-            --notes "APK debug Warkop48"
+            --notes "APK debug Warkop48 (${{ env.APP_URL }})"
