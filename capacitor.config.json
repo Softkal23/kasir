@@ -1,9 +1,10 @@
 {
-  "appId": "com.warkopku.app",
-  "appName": "WarkopKu",
+  "appId": "com.warkop48.app",
+  "appName": "Warkop48",
   "webDir": "www",
   "server": {
-    "url": "https://GANTI-DOMAINMU.com",
-    "cleartext": false
+    "url": "https://warkop48.freedev.app",
+    "cleartext": false,
+    "allowNavigation": ["warkop48.freedev.app"]
   }
 }
