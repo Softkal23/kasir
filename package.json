@@ -1,0 +1,10 @@
+{
+  "name": "warkopku-apk",
+  "version": "1.12.1",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  }
+}

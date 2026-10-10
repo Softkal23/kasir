@@ -1,0 +1,9 @@
+{
+  "appId": "com.warkopku.app",
+  "appName": "WarkopKu",
+  "webDir": "www",
+  "server": {
+    "url": "https://GANTI-DOMAINMU.com",
+    "cleartext": false
+  }
+}
