@@ -1,0 +1,10 @@
+{
+  "name": "warkop48-admin-apk",
+  "version": "1.12.3",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  }
+}

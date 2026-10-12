@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Warkop48 Admin</title>
+<style>body{background:#260212;color:#fff;font-family:sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;margin:0;text-align:center;padding:0 24px}button{margin-top:20px;padding:14px 28px;font-size:16px;border:0;border-radius:999px;background:#e4002b;color:#fff}</style>
+</head><body>
+<h2>Tidak ada koneksi internet</h2>
+<p>Sambungkan WiFi atau data seluler. Aplikasi akan terbuka sendiri begitu koneksi kembali.</p>
+<button onclick="go()">Coba lagi</button>
+<script>
+var APP="https://warkop48.freedev.app/#/admin";
+function go(){location.replace(APP);}
+setInterval(function(){fetch("https://warkop48.freedev.app/",{mode:"no-cors",cache:"no-store"}).then(go).catch(function(){});},4000);
+</script></body></html>

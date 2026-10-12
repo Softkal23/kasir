@@ -1,0 +1,13 @@
+{
+  "appId": "com.warkop48.admin",
+  "appName": "Warkop48 Admin",
+  "webDir": "www",
+  "server": {
+    "cleartext": false,
+    "allowNavigation": [
+      "warkop48.freedev.app"
+    ],
+    "errorPath": "offline.html"
+  },
+  "appendUserAgent": "Warkop48App"
+}
